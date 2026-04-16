@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>eric的健身助手</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#122f5f",
+                        "on-tertiary-container": "#005b66",
+                        "on-secondary-fixed-variant": "#404560",
+                        "on-secondary": "#292f48",
+                        "inverse-on-surface": "#292f48",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#dde1ff",
+                        "tertiary": "#9befff",
+                        "tertiary-container": "#00daf3",
+                        "on-primary-container": "#385283",
+                        "surface-dim": "#0b1229",
+                        "surface-container-high": "#222941",
+                        "tertiary-fixed": "#9cf0ff",
+                        "surface-bright": "#323851",
+                        "outline": "#8e909a",
+                        "on-surface": "#dce1ff",
+                        "surface-tint": "#adc6ff",
+                        "secondary-container": "#404560",
+                        "background": "#0b1229",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#44474f",
+                        "surface": "#0b1229",
+                        "on-secondary-fixed": "#141a32",
+                        "on-primary-fixed": "#001a42",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#00daf3",
+                        "on-tertiary-fixed-variant": "#004f58",
+                        "secondary-fixed-dim": "#c0c5e5",
+                        "inverse-primary": "#455e90",
+                        "primary-fixed": "#d8e2ff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-fixed": "#001f24",
+                        "inverse-surface": "#dce1ff",
+                        "on-surface-variant": "#c4c6d0",
+                        "surface-variant": "#2d344c",
+                        "surface-container": "#181e36",
+                        "primary": "#d8e2ff",
+                        "surface-container-low": "#141a32",
+                        "surface-container-lowest": "#060d24",
+                        "on-tertiary": "#00363d",
+                        "on-background": "#dce1ff",
+                        "on-primary-fixed-variant": "#2c4677",
+                        "secondary": "#c0c5e5",
+                        "primary-container": "#adc6ff",
+                        "on-secondary-container": "#aeb4d3",
+                        "surface-container-highest": "#2d344c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(11, 18, 41, 0.4);
+            backdrop-filter: blur(20px);
+        }
+        .kinetic-glow {
+            filter: drop-shadow(0 0 12px #00daf3);
+        }
+        .neon-stroke {
+            background: linear-gradient(90deg, #adc6ff 0%, #00daf3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="eric的健身助手">
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0b1229]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,229,255,0.08)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a futuristic athlete with neon lighting accents on skin and cybernetic visor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3LHJoZU9nCzPzUUBLDIE1ja5rwLproh6JhImJ0w6FBiOWLjeEhKpOEj_TYGHWsFpgSKegC1GcseDmti1GKR9xSU5ClHc3Mhhl4pPihQ6ILjYoSm1bWuDiP-Z3JrVcILGo88hC7r3G6b_saofJ5FkmdeJEOjfwVhWtaHCsFUQgBxLRqADpjYqQ1QVzg05McDG9sxVIqOU12A4TTe8eVEA-YbZb9scU9y-Azn2KkKdy4LwjPSxCiALJcJjSuSE1RHT4WmGiOlyws-m3"/>
+</div>
+<span class="font-headline tracking-tighter uppercase text-xl font-bold tracking-widest text-[#adc6ff]">eric的健身助手</span>
+</div>
+<button class="text-[#adc6ff] hover:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-6 space-y-8 max-w-lg mx-auto">
+<!-- Timer Section (The Kinetic Monolith) -->
+<section class="relative text-center py-10">
+<div class="absolute inset-0 bg-gradient-to-b from-tertiary-container/10 to-transparent blur-3xl rounded-full -z-10"></div>
+<div class="flex flex-col items-center">
+<span id="phase-title" class="font-headline text-label-sm uppercase tracking-[0.4em] text-tertiary-fixed-dim mb-2">准备开练</span>
+<h1 id="main-timer" class="font-headline text-[5rem] md:text-[7rem] leading-none font-bold tracking-tighter kinetic-glow text-primary-fixed-dim drop-shadow-[0_0_15px_#00daf3]">
+    00:30
+</h1>
+<div class="mt-6 inline-flex items-center gap-4 bg-surface-container-high px-8 py-3 rounded-full">
+<span class="text-on-surface-variant font-medium tracking-widest uppercase text-xs">总时长剩余</span>
+<span id="global-timer" class="font-headline text-2xl font-bold text-tertiary-container">12:00</span>
+</div>
+</div>
+</section>
+<!-- BGM Controller -->
+<section class="space-y-4">
+<div class="flex justify-between items-end mb-2">
+<h2 class="font-headline text-headline-md font-bold text-primary italic uppercase">专属 BGM 节拍律动</h2>
+<div class="flex items-center gap-2 text-tertiary">
+<span class="font-headline text-2xl font-bold">120-145</span>
+<span class="text-[10px] font-bold tracking-tighter uppercase">BPM</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-6">
+<!-- Tempo Slider -->
+<div class="relative h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-[65%] bg-tertiary kinetic-glow"></div>
+</div>
+<!-- Playlist -->
+<div class="grid grid-cols-2 gap-3" id="music-buttons">
+<button class="flex items-center gap-3 p-3 rounded-lg bg-tertiary-container/20 border border-tertiary-container/30 text-tertiary shadow-[0_0_12px_#00daf344]">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+<span class="text-xs font-bold tracking-wider">羽球热身 120BPM</span>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-highest/50 text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">nightlight</span>
+<span class="text-xs font-bold tracking-wider">赛场对抗 135BPM</span>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-highest/50 text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span class="text-xs font-bold tracking-wider">极限爆发 145BPM</span>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-highest/50 text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">waves</span>
+<span class="text-xs font-bold tracking-wider">心率舒缓 110BPM</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footwork Guide (Asymmetric Bento) -->
+<section class="space-y-4">
+<h2 class="font-headline text-headline-md font-bold text-primary italic uppercase text-right">步伐指引图</h2>
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-12 bg-surface-container-low rounded-xl p-4 overflow-hidden relative min-h-[160px] flex flex-col justify-center items-center text-center">
+<div class="relative z-10 w-full">
+<span id="current-action-label" class="inline-block text-[10px] bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-bold uppercase transition-colors mb-2">TRAINING</span>
+<p id="current-action" class="text-on-surface font-bold text-4xl md:text-5xl tracking-wide drop-shadow-md">垫步大跳</p>
+<p id="next-action" class="text-on-surface-variant font-medium mt-4 text-sm">下一个动作: 开合跳</p>
+</div>
+<div class="absolute inset-0 opacity-20">
+<div class="w-full h-full" data-alt="abstract architectural blueprint of geometric lines glowing in cyan on dark blue background representing footwork patterns" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAeQ_qbY9JxHB6w0YtIWUZTdCBUstJARF_9b6aMPiw8Kc08a1JblRqJ6neJ4z0EPWcbSuQa2jeyGpwC-FVk6Yf87TCcpzCnLf1wjJpMIB6xBbjC-0msLS4h_30sODy77HDIK4Ewqa_dM6BLu-t8rD6opfjlrdaI9hTQuC2O-NEhNYT-3nGcQuMCg7t-j-VEP4RJulnjqmcZrx-psyosswEDouh6hh6cIl0Urv7FaWnPyxj8aJeIg6sik8TItbv0XbQmFBZv13OX5Doq'); background-size: cover; background-position: center;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Minimalist Row -->
+<section class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">步伐频次</span>
+<div class="mt-1 font-headline text-xl text-primary-fixed-dim">142<span class="text-[10px] ml-1 opacity-50">/min</span></div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">重心偏离</span>
+<div class="mt-1 font-headline text-xl text-primary-fixed-dim">2.4<span class="text-[10px] ml-1 opacity-50">%</span></div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">能量消耗</span>
+<div class="mt-1 font-headline text-xl text-primary-fixed-dim">86<span class="text-[10px] ml-1 opacity-50">kcal</span></div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#0b1229]/40 backdrop-blur-2xl rounded-t-[3rem] shadow-[0px_-12px_32px_rgba(0,229,255,0.05)]">
+<!-- 打卡 -->
+<a class="flex flex-col items-center justify-center text-[#adc6ff]/50 hover:text-[#9befff] transition-colors" href="record.html">
+<span class="material-symbols-outlined mb-1">edit_note</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">打卡</span>
+</a>
+<!-- 统计 -->
+<a class="flex flex-col items-center justify-center text-[#adc6ff]/50 hover:text-[#9befff] transition-colors" href="page_2.html">
+<span class="material-symbols-outlined mb-1">insights</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">统计</span>
+</a>
+<!-- 日程 -->
+<a class="flex flex-col items-center justify-center text-[#adc6ff]/50 hover:text-[#9befff] transition-colors" href="schedule.html">
+<span class="material-symbols-outlined mb-1">calendar_today</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">日历</span>
+</a>
+<!-- 专项 (Active State) -->
+<a class="flex flex-col items-center justify-center text-[#00daf3] bg-[#adc6ff]/10 rounded-full px-4 py-2 drop-shadow-[0_0_12px_#00daf3]" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">sports_tennis</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase tracking-widest">专项</span>
+</a>
+</nav>
+<!-- Floating Play Button for focused state -->
+<div class="fixed bottom-24 right-6">
+<button class="w-16 h-16 bg-tertiary-container text-on-tertiary-container rounded-full shadow-[0px_24px_48px_rgba(0,229,255,0.3)] flex items-center justify-center hover:scale-110 active:scale-90 transition-all">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+</div>
+
+<!-- App Core Brain (Interactive JS Engine) -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Workout configuration (18 exercises)
+        const exercises = [
+            "垫步大跳", "开合跳", "交叉跳", "左右启动步", "大步", "前后左右",
+            "左脚V字", "右脚V字", "摸脚尖", "转体跳", "高抬腿", "后踢腿",
+            "全蹲转髋", "两边蹬跳", "半蹲跳", "鸭子跳", "小碎步", "波比跳"
+        ];
+
+        const workTime = 30;
+        const restTime = 10;
+
+        let currentIndex = 0;
+        let currentPhase = 'WORK';
+        let timeRemaining = workTime;
+        let globalTime = 12 * 60;
+        let isRunning = false;
+        let timerInterval = null;
+
+        const mainTimerEl = document.getElementById("main-timer");
+        const globalTimerEl = document.getElementById("global-timer");
+        const phaseTitleEl = document.getElementById("phase-title");
+        const currentActionEl = document.getElementById("current-action");
+        const nextActionEl = document.getElementById("next-action");
+        const currentActionLabelEl = document.getElementById("current-action-label");
+        const playPauseBtn = document.querySelector('.fixed.bottom-24.right-6 button');
+        const playPauseIcon = playPauseBtn.querySelector('span');
+
+        // ── BGM ENGINE (Web Audio API - no files needed) ─────────────
+        let audioCtx = null;
+        let beatInterval = null;
+        let currentBpm = 0;
+
+        function getAudioCtx() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        // Plays a single drum hit: kick (low) or hi-hat (high)
+        function playDrumHit(type) {
+            const ctx = getAudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            if (type === 'kick') {
+                osc.frequency.setValueAtTime(150, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(1.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.2);
+            } else if (type === 'snare') {
+                // Snare: noise burst
+                const bufSize = ctx.sampleRate * 0.1;
+                const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+                const data = buf.getChannelData(0);
+                for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+                const src = ctx.createBufferSource();
+                src.buffer = buf;
+                const snareGain = ctx.createGain();
+                src.connect(snareGain);
+                snareGain.connect(ctx.destination);
+                snareGain.gain.setValueAtTime(0.5, ctx.currentTime);
+                snareGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+                src.start(ctx.currentTime);
+            } else {
+                // Hi-hat: short high tone
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(1200, ctx.currentTime);
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.04);
+            }
+        }
+
+        // Beat patterns: array of [beat#, type] per bar
+        const patterns = {
+            110: [ [0,'kick'],[2,'hihat'],[4,'snare'],[6,'hihat'] ], // 4/4 relaxed
+            120: [ [0,'kick'],[2,'hihat'],[4,'snare'],[6,'hihat'] ], // standard
+            135: [ [0,'kick'],[1,'hihat'],[2,'snare'],[3,'hihat'],[4,'kick'],[5,'hihat'],[6,'snare'],[7,'hihat'] ], // 8th notes
+            145: [ [0,'kick'],[1,'hihat'],[2,'kick'],[3,'snare'],[4,'kick'],[5,'hihat'],[6,'snare'],[7,'hihat'] ]  // driving
+        };
+
+        function startBeat(bpm) {
+            stopBeat();
+            currentBpm = bpm;
+            const pat = patterns[bpm] || patterns[120];
+            const totalBeats = pat.length;
+            // ms per sub-beat
+            const msBeat = (60000 / bpm) / (totalBeats / 4);
+            let beatPos = 0;
+            beatInterval = setInterval(() => {
+                const hit = pat.find(p => p[0] === beatPos);
+                if (hit) playDrumHit(hit[1] === 'hihat' ? 'hihat' : hit[1]);
+                beatPos = (beatPos + 1) % totalBeats;
+            }, msBeat);
+        }
+
+        function stopBeat() {
+            if (beatInterval) { clearInterval(beatInterval); beatInterval = null; }
+        }
+
+        // ── VOICE ENGINE (short, punchy coach style) ──────────────────
+        let voiceReady = false;
+        let preferredVoice = null;
+
+        function initVoice() {
+            if (!('speechSynthesis' in window)) return;
+            const tryPick = () => {
+                const voices = window.speechSynthesis.getVoices();
+                // Prefer non-Google, non-system robotic voice: look for Tingting, Meijia, or any zh-CN
+                const picks = voices.filter(v => v.lang.startsWith('zh'));
+                preferredVoice = picks.find(v => /Ting|Mei|Sin|Siri/i.test(v.name))
+                               || picks[0]
+                               || null;
+                voiceReady = true;
+            };
+            window.speechSynthesis.onvoiceschanged = tryPick;
+            tryPick();
+        }
+        initVoice();
+
+        function speak(text, rate = 1.1, pitch = 1.1) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'zh-CN';
+            u.rate = rate;
+            u.pitch = pitch;
+            if (preferredVoice) u.voice = preferredVoice;
+            window.speechSynthesis.speak(u);
+        }
+
+        // Short punchy cues
+        function cueStart()    { speak("开始！", 1.2, 1.2); }
+        function cuePause()    { speak("暂停", 1.0, 1.0); }
+        function cueCountdown(n) { speak(String(n), 1.3, 1.3); }
+        function cueRest(next) { speak(`换！${next}`, 1.1, 1.1); }
+        function cueGo(name)   { speak(`${name}！走`, 1.2, 1.2); }
+        function cueDone()     { speak("完成！", 1.1, 1.2); }
+
+        // ── UI UPDATE ─────────────────────────────────────────────────
+        function formatTime(secs) {
+            const m = Math.floor(secs / 60).toString().padStart(2, '0');
+            const s = (secs % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function updateUI() {
+            mainTimerEl.textContent = formatTime(timeRemaining);
+            globalTimerEl.textContent = formatTime(globalTime);
+
+            if (currentPhase === 'DONE') {
+                phaseTitleEl.textContent = "完成！";
+                currentActionEl.textContent = "12分钟达成";
+                nextActionEl.textContent = "拉伸放松一下吧";
+                currentActionLabelEl.textContent = "COMPLETED";
+                currentActionLabelEl.className = "inline-block text-[10px] bg-primary text-on-primary px-3 py-1 rounded-full font-bold uppercase mb-2";
+                mainTimerEl.classList.remove('kinetic-glow', 'text-primary-fixed-dim');
+                return;
+            }
+
+            if (currentPhase === 'WORK') {
+                phaseTitleEl.textContent = `第 ${currentIndex + 1} / 18 组`;
+                currentActionEl.textContent = exercises[currentIndex];
+                currentActionLabelEl.textContent = "TRAINING";
+                currentActionLabelEl.className = "inline-block text-[10px] bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-bold uppercase transition-colors mb-2 animate-pulse";
+                mainTimerEl.className = "font-headline text-[5rem] md:text-[7rem] leading-none font-bold tracking-tighter kinetic-glow text-primary-fixed-dim drop-shadow-[0_0_15px_#00daf3]";
+            } else {
+                phaseTitleEl.textContent = "休息";
+                currentActionEl.textContent = "调整呼吸";
+                currentActionLabelEl.textContent = "REST";
+                currentActionLabelEl.className = "inline-block text-[10px] bg-error/80 text-on-error px-3 py-1 rounded-full font-bold uppercase mb-2";
+                mainTimerEl.className = "font-headline text-[5rem] md:text-[7rem] leading-none font-bold tracking-tighter text-on-surface-variant";
+            }
+
+            const nextIdx = currentPhase === 'WORK' ? currentIndex + 1 : currentIndex;
+            if (nextIdx < exercises.length) {
+                nextActionEl.textContent = `下一个: ${exercises[nextIdx]}`;
+            } else {
+                nextActionEl.textContent = "最后一组，冲！";
+            }
+        }
+
+        // ── TIMER CORE ────────────────────────────────────────────────
+        function toggleTimer() {
+            if (currentPhase === 'DONE') return;
+            if (!audioCtx) getAudioCtx(); // unlock on first tap
+
+            if (isRunning) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                stopBeat();
+                cuePause();
+                playPauseIcon.textContent = 'play_arrow';
+                playPauseBtn.classList.replace('bg-tertiary-container', 'bg-surface-variant');
+                playPauseBtn.classList.replace('text-on-tertiary-container', 'text-on-surface');
+            } else {
+                cueStart();
+                if (currentBpm > 0) startBeat(currentBpm);
+
+                timerInterval = setInterval(() => {
+                    if (globalTime <= 0) return;
+                    timeRemaining--;
+                    globalTime--;
+
+                    // Last 3 seconds countdown
+                    if ([3,2,1].includes(timeRemaining) && currentPhase === 'WORK') {
+                        cueCountdown(timeRemaining);
+                    }
+
+                    if (timeRemaining < 0) {
+                        if (currentPhase === 'WORK') {
+                            currentPhase = 'REST';
+                            currentIndex++;
+                            if (currentIndex >= exercises.length) {
+                                currentPhase = 'DONE';
+                                timeRemaining = 0;
+                                globalTime = 0;
+                                clearInterval(timerInterval);
+                                stopBeat();
+                                updateUI();
+                                cueDone();
+                                return;
+                            }
+                            timeRemaining = restTime;
+                            cueRest(exercises[currentIndex]);
+                        } else {
+                            currentPhase = 'WORK';
+                            timeRemaining = workTime;
+                            cueGo(exercises[currentIndex]);
+                        }
+                    }
+                    updateUI();
+                }, 1000);
+
+                playPauseIcon.textContent = 'pause';
+                playPauseBtn.classList.replace('bg-surface-variant', 'bg-tertiary-container');
+                playPauseBtn.classList.replace('text-on-surface', 'text-on-tertiary-container');
+            }
+            isRunning = !isRunning;
+        }
+
+        // Init paused state
+        updateUI();
+        playPauseIcon.textContent = 'play_arrow';
+        playPauseBtn.classList.replace('bg-tertiary-container', 'bg-surface-variant');
+        playPauseBtn.classList.replace('text-on-tertiary-container', 'text-on-surface');
+        playPauseBtn.addEventListener('click', toggleTimer);
+
+        // ── BGM BUTTON WIRING ─────────────────────────────────────────
+        const bpmMap = [120, 135, 145, 110]; // matches the 4 buttons in order
+        const musicButtons = document.querySelectorAll('#music-buttons button');
+        musicButtons.forEach((btn, i) => {
+            btn.addEventListener('click', function() {
+                musicButtons.forEach(b => {
+                    b.classList.remove('bg-tertiary-container/20', 'border', 'border-tertiary-container/30', 'text-tertiary', 'shadow-[0_0_12px_#00daf344]');
+                    b.classList.add('bg-surface-container-highest/50', 'text-on-surface-variant');
+                    const sp = b.querySelector('span.material-symbols-outlined');
+                    if(sp) sp.style.fontVariationSettings = "'FILL' 0";
+                });
+                this.classList.remove('bg-surface-container-highest/50', 'text-on-surface-variant');
+                this.classList.add('bg-tertiary-container/20', 'border', 'border-tertiary-container/30', 'text-tertiary', 'shadow-[0_0_12px_#00daf344]');
+                const sp = this.querySelector('span.material-symbols-outlined');
+                if(sp) sp.style.fontVariationSettings = "'FILL' 1";
+
+                const bpm = bpmMap[i];
+                startBeat(bpm);
+            });
+        });
+    });
+</script>
+</body></html>
