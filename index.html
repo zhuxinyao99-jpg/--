@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Eric的健身助手</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script>
@@ -61,12 +61,12 @@
         .g-手臂 {color:var(--c-手臂);background:var(--bg-手臂);border-color:var(--c-手臂)}
         .g-其他 {color:var(--c-其他);background:var(--bg-其他);border-color:var(--c-其他)}
 
-        .cal-day { min-height:60px; border-radius:10px; padding:4px 3px 3px; display:flex; flex-direction:column; align-items:center; gap:2px; transition: transform .15s; border: 1px solid transparent; }
+        .cal-day { min-height:85px; border-radius:12px; padding:6px 4px 4px; display:flex; flex-direction:column; align-items:center; gap:3px; transition: transform .15s; border: 1px solid transparent; }
         .cal-day.has-data { cursor:pointer; }
         .cal-day.has-data:active { transform:scale(.95); }
         .cal-day.is-today { border-color:#B5E18B !important; background:rgba(181, 225, 139,.05); }
-        .cal-day-num { font-size:11px; font-weight:700; line-height:1; font-family:'Space Grotesk',sans-serif; }
-        .cal-badge { font-size:9px; font-weight:800; padding:1px 4px; border-radius:4px; border-width:1px; border-style:solid; line-height:1.4; letter-spacing:.02em; text-align:center; }
+        .cal-day-num { font-size:13px; font-weight:700; line-height:1; font-family:'Space Grotesk',sans-serif; }
+        .cal-badge { font-size:10px; font-weight:800; padding:2px 5px; border-radius:4px; border-width:1px; border-style:solid; line-height:1.4; letter-spacing:.02em; text-align:center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
         .tab-active { background:rgba(181, 225, 139, 0.15); color:#B5E18B; border-color:#B5E18B; }
         .tab-inactive { background:transparent; color:#EAE6BC; border-color:transparent; }
@@ -76,8 +76,11 @@
         input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
     </style>
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="apple-touch-icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fitness">
 </head>
 <body class="font-body pb-32">
 
@@ -118,13 +121,13 @@
   <main class="pt-20 px-4 max-w-lg mx-auto space-y-5">
       <section>
         <p class="text-[10px] font-bold text-[#EAE6BC] uppercase tracking-widest mb-2 ml-1">选择训练部位</p>
-        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar" id="muscle-tabs">
-          <button class="muscle-tab tab-active flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all" data-group="背">🔙 背</button>
-          <button class="muscle-tab tab-inactive flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all" data-group="胸">💪 胸</button>
-          <button class="muscle-tab tab-inactive flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all" data-group="腿">🦵 腿</button>
-          <button class="muscle-tab tab-inactive flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all" data-group="肩">🔝 肩</button>
-          <button class="muscle-tab tab-inactive flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all" data-group="手臂">💪 手臂</button>
-          <button class="muscle-tab tab-inactive flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all" data-group="其他">✨ 其他</button>
+        <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar" id="muscle-tabs">
+          <button class="muscle-tab tab-active flex-shrink-0 px-6 py-3 rounded-full text-base font-bold border transition-all" data-group="背">🔙 背</button>
+          <button class="muscle-tab tab-inactive flex-shrink-0 px-6 py-3 rounded-full text-base font-bold border transition-all" data-group="胸">💪 胸</button>
+          <button class="muscle-tab tab-inactive flex-shrink-0 px-6 py-3 rounded-full text-base font-bold border transition-all" data-group="腿">🦵 腿</button>
+          <button class="muscle-tab tab-inactive flex-shrink-0 px-6 py-3 rounded-full text-base font-bold border transition-all" data-group="肩">🔝 肩</button>
+          <button class="muscle-tab tab-inactive flex-shrink-0 px-6 py-3 rounded-full text-base font-bold border transition-all" data-group="手臂">💪 手臂</button>
+          <button class="muscle-tab tab-inactive flex-shrink-0 px-6 py-3 rounded-full text-base font-bold border transition-all" data-group="其他">✨ 其他</button>
         </div>
       </section>
 
@@ -156,10 +159,13 @@
             <input type="number" id="input-sets" placeholder="4" class="w-full bg-surface-container-highest border-none rounded-lg p-3 text-center text-2xl font-headline font-bold text-primary focus:ring-2 focus:ring-primary outline-none transition-all"/>
           </div>
         </div>
-        <div class="flex items-end justify-between pt-2 border-t border-[#EAE6BC]/10">
+        <div class="flex items-end justify-between pt-4 border-t border-[#EAE6BC]/10">
           <div>
-            <span class="text-[10px] font-bold text-on-surface-variant uppercase">本项总容量</span>
-            <div id="live-volume" class="text-3xl font-headline font-bold text-primary">0.0 <span class="text-sm font-normal text-on-surface-variant">Tons</span></div>
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase">本日体重记录</span>
+            <div class="flex items-baseline gap-1 mt-1">
+              <input type="number" step="0.1" id="input-bw" placeholder="70.0" class="w-24 bg-surface-container-highest border-none rounded-lg p-2 text-center text-xl font-headline font-bold text-primary focus:ring-2 focus:ring-primary outline-none transition-all"/>
+              <span class="text-sm font-normal text-on-surface-variant">KG</span>
+            </div>
           </div>
           <div class="text-right">
             <span class="text-[10px] font-bold text-on-surface-variant uppercase">RPE</span>
@@ -181,6 +187,11 @@
         </div>
         <div id="today-log" class="space-y-2"></div>
       </section>
+
+      <div class="flex justify-center gap-6 pb-24 mt-4">
+        <button id="btn-export" class="text-xs text-[#EAE6BC]/50 font-bold underline decoration-[#EAE6BC]/20 hover:text-primary transition-colors">↑ 导出备份历史数据</button>
+        <button id="btn-import" class="text-xs text-[#EAE6BC]/50 font-bold underline decoration-[#EAE6BC]/20 hover:text-primary transition-colors">↓ 导入备份历史数据</button>
+      </div>
   </main>
 </div>
 
@@ -219,29 +230,28 @@
       <div class="md:col-span-2 bg-surface-container-highest/30 p-8 rounded-lg flex flex-col border border-[#EAE6BC]/10">
         <div class="flex justify-between items-start mb-6">
           <div>
-            <h2 class="font-headline text-xl font-bold text-[#F0FFC2] tracking-tight">每日总做组容量趋势</h2>
+            <h2 class="font-headline text-xl font-bold text-[#F0FFC2] tracking-tight">每日体重变化曲线</h2>
           </div>
           <div class="text-right">
-            <span class="text-xs font-bold text-on-surface-variant uppercase block">最高容量</span>
-            <span class="text-2xl font-headline font-bold text-primary" id="total-volume-display">0 Tons</span>
+            <span class="text-xs font-bold text-on-surface-variant uppercase block">近期均值</span>
+            <span class="text-2xl font-headline font-bold text-primary" id="current-bw-display">加载中</span>
           </div>
         </div>
         <div class="h-52 w-full relative">
-          <canvas id="volumeChart"></canvas>
+          <canvas id="bwChart"></canvas>
         </div>
       </div>
     </div>
 
     <section class="bg-surface-container-highest/30 border border-[#EAE6BC]/10 p-8 rounded-lg">
       <div class="flex justify-between items-center mb-8">
-        <h2 class="text-xl font-headline font-bold text-[#F0FFC2] tracking-tight">极限重量(1RM)演进</h2>
+        <h2 class="text-xl font-headline font-bold text-[#F0FFC2] tracking-tight">各部位极限力量进步走势</h2>
         <div class="text-right">
-          <span class="text-xs font-bold text-on-surface-variant uppercase block">突破上限</span>
-          <span class="text-2xl font-headline font-bold text-primary" id="current-smash-display">加载中</span>
+          <span class="text-xs font-bold text-on-surface-variant uppercase block">跟踪多群组</span>
         </div>
       </div>
       <div class="relative h-64 w-full">
-          <canvas id="weightChart"></canvas>
+          <canvas id="progressChart"></canvas>
       </div>
     </section>
 
@@ -422,17 +432,37 @@ const A2G={ '直臂下压':'背','坐姿划船':'背','高位下拉':'背','坐�
             '拉绳索':'肩','绳索面拉':'肩','侧平举':'肩','龙门架侧平举':'肩','反向蝴蝶':'肩','推肩(躺)':'肩','坐姿反向飞鸟':'肩',
             '二头弯举':'手臂','锤式弯举':'手臂','三头下压':'手臂','窄距俯卧撑':'手臂'};
 function getRawRecords() {
-    let raw = JSON.parse(localStorage.getItem('gym_records') || '[]');
-    if(raw.length === 0) {
-        // Seed some starter data if brand new
-        raw=[
-            {"date":new Date().toISOString(),"action":"深蹲","group":"腿","weight":20,"sets":4,"reps":10,"volume":800,"rpe":8}
-        ];
-        localStorage.setItem('gym_records', JSON.stringify(raw));
+    try {
+        let raw = JSON.parse(localStorage.getItem('gym_records') || '[]');
+        if(raw.length === 0) {
+            raw=[ {"date":new Date().toISOString(),"action":"深蹲","group":"腿","weight":20,"sets":4,"reps":10,"volume":800,"rpe":8} ];
+            localStorage.setItem('gym_records', JSON.stringify(raw));
+        }
+        return raw;
+    } catch (e) {
+        return [];
     }
-    return raw;
 }
 function getRecords() { return getRawRecords().map(r => ({ ...r, group: r.group || A2G[r.action] || '其他' })); }
+
+function saveRecord(r) {
+    try {
+        const raw = getRawRecords(); raw.push(r);
+        localStorage.setItem('gym_records', JSON.stringify(raw));
+    } catch(e) { console.error("Storage blocked", e); }
+}
+
+function getBWRecords() { try { return JSON.parse(localStorage.getItem('gym_bw') || '[]'); } catch(e) { return []; } }
+function saveBW(weight) {
+    if(!weight) return;
+    try {
+        const raw = getBWRecords();
+        const dateKey = new Date().toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' });
+        const filtered = raw.filter(r => r.date !== dateKey);
+        filtered.push({ date: dateKey, weight: parseFloat(weight) });
+        localStorage.setItem('gym_bw', JSON.stringify(filtered));
+    } catch(e) {}
+}
 
 // --- NAV SYSTEM ---
 const PageModules = {};
@@ -538,11 +568,11 @@ PageModules['record'] = (function() {
     });
 
     const iW = document.getElementById('input-weight'), iR = document.getElementById('input-reps'), iS = document.getElementById('input-sets');
-    function calcVol() {
-        const v = ((parseFloat(iW.value)||0)*(parseInt(iR.value)||0)*(parseInt(iS.value)||0)/1000);
-        document.getElementById('live-volume').innerHTML = `${v.toFixed(2)} <span class="text-sm font-normal text-on-surface-variant">Tons</span>`;
-    }
-    [iW,iR,iS].forEach(i => i.addEventListener('input', calcVol));
+    const bwInput = document.getElementById('input-bw');
+    
+    // Auto-fill latest BW
+    const latestBWArr = getBWRecords();
+    if(latestBWArr.length) bwInput.value = latestBWArr[latestBWArr.length-1].weight;
 
     const rpeSlider = document.getElementById('slider-rpe');
     const rpeLabels = {5:'很轻松',6:'有余力',7:'还能做3个',8:'还能再做2个',9:'极限边缘',10:'完全力竭'};
@@ -554,15 +584,37 @@ PageModules['record'] = (function() {
 
     document.getElementById('save-btn').addEventListener('click', () => {
         const action = currentAction || document.getElementById('custom-action-input').value.trim();
+        saveBW(bwInput.value); // Always ensure bodyweight is logged
         if(!action || !iW.value || !iR.value || !iS.value) return alert('请选择或输入动作名称，并填写重量、次数、组数！');
         const r = { id: Date.now(), date: new Date().toISOString(), action, group: currentGroup, weight: parseFloat(iW.value), reps: parseInt(iR.value), sets: parseInt(iS.value), rpe: parseFloat(rpeSlider.value), volume: (parseFloat(iW.value)*parseInt(iR.value)*parseInt(iS.value)) };
-        const raw = getRawRecords(); raw.push(r);
-        localStorage.setItem('gym_records', JSON.stringify(raw));
+        saveRecord(r);
 
         const btn = document.getElementById('save-btn');
         btn.textContent = '✓ 已记录！';
-        renderTodayLog(); iW.value = ''; calcVol();
+        renderTodayLog(); iW.value = '';
         setTimeout(()=> btn.textContent = '＋ 录入今日账本', 1500);
+    });
+
+    document.getElementById('btn-export').addEventListener('click', () => {
+        const raw = localStorage.getItem('gym_records') || '[]';
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(raw).then(() => alert('已将所有历史数据复制到剪贴板！\\n去 Github 新网址点击“导入”并粘贴即可。')).catch(() => prompt('按全选复制：', raw));
+        } else {
+            prompt('按全选复制：', raw);
+        }
+    });
+
+    document.getElementById('btn-import').addEventListener('click', () => {
+        const str = prompt('长按粘贴你之前导出的历史数据码：');
+        if(!str) return;
+        try {
+            const arr = JSON.parse(str);
+            if(Array.isArray(arr)) {
+                localStorage.setItem('gym_records', JSON.stringify(arr));
+                alert('数据恢复成功！页面将刷新。');
+                location.reload();
+            } else { alert('数据格式错误，不是一个列表'); }
+        } catch(e) { alert('数据解析失败，检查是否粘贴完整！'); }
     });
 
     renderChips('背');
@@ -578,47 +630,53 @@ PageModules['stats'] = (function() {
 
     function renderStats() {
         const records = getRecords();
-        if(!records.length) return;
-
-        const dailyVols = {}, dailyMaxWgts = {};
-        records.forEach(r => {
-            const dateKey = new Date(r.date).toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' });
-            dailyVols[dateKey] = (dailyVols[dateKey] || 0) + r.volume;
-            dailyMaxWgts[dateKey] = Math.max((dailyMaxWgts[dateKey] || 0), r.weight);
-        });
-
-        const uniqueDates = Object.keys(dailyVols).slice(-7);
-        const volumeData = uniqueDates.map(dk => dailyVols[dk] / 1000);
-        const weightData = uniqueDates.map(dk => dailyMaxWgts[dk]);
+        const bwRecords = getBWRecords();
         
-        document.getElementById("total-volume-display").innerHTML = `${(volumeData[volumeData.length-1]||0).toFixed(1)} <span class="text-sm font-normal text-on-surface-variant">Tons</span>`;
-        if(weightData.length) document.getElementById("current-smash-display").textContent = `${Math.max(...weightData)} KG`;
+        // --- SCALE 1: Bodyweight Chart ---
+        const lastBW = bwRecords.slice(-14);
+        const bwLabels = lastBW.map(r => r.date);
+        const bwData = lastBW.map(r => r.weight);
+        if(bwData.length > 0) {
+            const currentAvg = (bwData.reduce((a,b)=>a+b,0) / bwData.length).toFixed(1);
+            document.getElementById("current-bw-display").innerHTML = `${currentAvg} <span class="text-xs font-normal">KG</span>`;
+        } else {
+            document.getElementById("current-bw-display").textContent = "-- KG";
+        }
 
         if(volChart) volChart.destroy();
         if(wtChart) wtChart.destroy();
 
-        const ctxVol = document.getElementById('volumeChart').getContext('2d');
-        const gradVol = ctxVol.createLinearGradient(0, 0, 0, 400);
-        gradVol.addColorStop(0, 'rgba(181, 225, 139, 0.9)'); // B5E18B
-        gradVol.addColorStop(1, 'rgba(181, 225, 139, 0.1)');
-        
-        volChart = new Chart(ctxVol, {
-            type: 'bar',
-            data: { labels: uniqueDates, datasets: [{ data: volumeData, backgroundColor: gradVol, borderRadius: 4 }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-                       scales: { x: { grid: { display: false } }, y: { display: false, grid: { display: false } } } }
+        if(bwData.length > 0) {
+            const ctxBw = document.getElementById('bwChart').getContext('2d');
+            const gradBw = ctxBw.createLinearGradient(0, 0, 0, 400);
+            gradBw.addColorStop(0, 'rgba(181, 225, 139, 0.4)');
+            gradBw.addColorStop(1, 'rgba(181, 225, 139, 0)');
+            volChart = new Chart(ctxBw, {
+                type: 'line',
+                data: { labels: bwLabels, datasets: [{ data: bwData, borderColor: '#B5E18B', backgroundColor: gradBw, borderWidth: 3, fill: true, tension: 0.3, pointRadius: 4 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+                           scales: { x: { grid: { display: false } }, y: { display: false, min: Math.min(...bwData)-5, max: Math.max(...bwData)+5 } } }
+            });
+        }
+
+        // --- SCALE 2: Muscle Group Progress ---
+        const uniqueDates = [...new Set(records.map(r => new Date(r.date).toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' })))].slice(-10);
+        const groupsToTrack = ['胸','背','腿','肩','手臂'];
+        const groupColors = {'背':'#B5E18B', '胸':'#ffb4ab', '腿':'#F0FFC2', '肩':'#EAE6BC', '手臂':'#d8e2ff'};
+        const datasets = groupsToTrack.map(g => {
+            const data = uniqueDates.map(d => {
+                const dayRecs = records.filter(r => new Date(r.date).toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' }) === d && r.group === g);
+                return dayRecs.length ? Math.max(...dayRecs.map(x=>x.weight)) : null;
+            });
+            return { label: g, data, borderColor: groupColors[g], borderDash: g === '肩' || g === '手臂' ? [5,5] : [], tension: 0.3, spanGaps: true, pointRadius: 3, borderWidth: 2 };
         });
 
-        const ctxWt = document.getElementById('weightChart').getContext('2d');
-        const gradWt = ctxWt.createLinearGradient(0, 0, 0, 400);
-        gradWt.addColorStop(0, 'rgba(181, 225, 139, 0.6)');
-        gradWt.addColorStop(1, 'rgba(181, 225, 139, 0)');
-
-        wtChart = new Chart(ctxWt, {
+        const ctxProg = document.getElementById('progressChart').getContext('2d');
+        wtChart = new Chart(ctxProg, {
             type: 'line',
-            data: { labels: uniqueDates, datasets: [{ data: weightData, borderColor: '#B5E18B', backgroundColor: gradWt, borderWidth: 4, fill: true, tension: 0.4 }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-                       scales: { x: { grid: { color: 'rgba(234,230,188,0.1)' } }, y: { grid: { color: 'rgba(234,230,188,0.1)' } } } }
+            data: { labels: uniqueDates, datasets },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: '#EAE6BC', boxWidth: 12, font: { size: 10 } } } },
+                       scales: { x: { grid: { color: 'rgba(234,230,188,0.05)' } }, y: { grid: { color: 'rgba(234,230,188,0.05)' } } } }
         });
 
         // PR Wall
@@ -704,12 +762,13 @@ PageModules['schedule'] = (function() {
         document.getElementById('rest-days').textContent = upToDay - trainDays;
 
         const barsEl  = document.getElementById('freq-bars'); barsEl.innerHTML = '';
-        const groups  = ['背','胸','腿','肩','手臂','其他'];
+        let groups  = ['背','胸','腿','肩','手臂','其他'];
+        groups.sort((a,b) => (freq[b]||0) - (freq[a]||0)); // Sort by frequency descending
         const maxFreq = Math.max(1, ...groups.map(g=>freq[g]||0));
         groups.forEach(g => {
             const cnt = freq[g]||0, pct = Math.round((cnt/maxFreq)*100);
-            const bar = document.createElement('div'); bar.className = 'space-y-1';
-            bar.innerHTML = `<div class="flex justify-between items-center"><span class="g-${g} cal-badge border text-xs py-0.5 px-2">${g}</span><span class="text-xs text-on-surface-variant font-bold">${cnt} 次</span></div><div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="h-full rounded-full transition-all g-${g}" style="width:${pct}%;opacity:.8"></div></div>`;
+            const bar = document.createElement('div'); bar.className = 'space-y-1 mb-2';
+            bar.innerHTML = `<div class="flex justify-between items-center"><span class="g-${g} cal-badge border text-xs py-1 px-3 ${cnt===0?'opacity-40':''}">${g}</span><span class="text-[10px] text-on-surface-variant font-bold">${cnt} 次</span></div><div class="h-3.5 bg-surface-container-highest rounded-full overflow-hidden mt-1"><div class="h-full rounded-full transition-all g-${g}" style="width:${pct}%;opacity:.9"></div></div>`;
             barsEl.appendChild(bar);
         });
     }
